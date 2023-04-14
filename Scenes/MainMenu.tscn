@@ -1,0 +1,109 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2cscn61k76et"]
+
+[ext_resource type="Texture2D" uid="uid://igjixcdhp7jf" path="res://Assets/HUD/EmptyHeart.png" id="1_ni6hv"]
+[ext_resource type="Texture2D" uid="uid://bxbxfrd54cylp" path="res://Assets/Fruits/60785e3b8fe32f534c6d9906_Pic_6.jpg" id="1_qug1h"]
+[ext_resource type="Texture2D" uid="uid://eq0bn67ra4ar" path="res://Assets/HUD/Heart.png" id="2_nl7dc"]
+[ext_resource type="Texture2D" uid="uid://dplkt7vugsegt" path="res://Assets/HUD/plusHeart.png" id="3_p6r1f"]
+[ext_resource type="Texture2D" uid="uid://w6oyrfoyafvw" path="res://Assets/HUD/SprintEmpty.png" id="4_qca5e"]
+[ext_resource type="Texture2D" uid="uid://c28pcpaf0ctqr" path="res://Assets/HUD/Sprint.png" id="5_kirwb"]
+[ext_resource type="Script" path="res://Scripts/Play.gd" id="7_ybde7"]
+
+[node name="GameControl" type="Node2D"]
+
+[node name="Tutorial" type="Node" parent="."]
+
+[node name="HeartsEmpty" type="TextureRect" parent="Tutorial"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_right = 160.0
+offset_bottom = 16.0
+scale = Vector2(6, 6)
+texture = ExtResource("1_ni6hv")
+stretch_mode = 1
+
+[node name="GoldenHeartsEmpty" type="TextureRect" parent="Tutorial"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 96.0
+scale = Vector2(6, 6)
+texture = ExtResource("1_ni6hv")
+stretch_mode = 1
+
+[node name="HeartsFull" type="TextureRect" parent="Tutorial"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_right = 80.0
+offset_bottom = 16.0
+scale = Vector2(6, 6)
+texture = ExtResource("2_nl7dc")
+stretch_mode = 1
+
+[node name="GoldenHeartsFull" type="TextureRect" parent="Tutorial"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_left = -96.0
+offset_top = 80.0
+offset_right = -16.0
+offset_bottom = 96.0
+scale = Vector2(6, 5.976)
+texture = ExtResource("3_p6r1f")
+stretch_mode = 1
+
+[node name="SprintEmpty" type="TextureRect" parent="Tutorial"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_left = 1026.0
+offset_top = 135.0
+offset_right = 1042.0
+offset_bottom = 215.0
+scale = Vector2(6, 6)
+texture = ExtResource("4_qca5e")
+stretch_mode = 1
+
+[node name="SprintFull" type="TextureRect" parent="Tutorial"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_left = 1026.0
+offset_top = 327.0
+offset_right = 1042.0
+offset_bottom = 375.0
+scale = Vector2(6, 6)
+texture = ExtResource("5_kirwb")
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="Tutorial"]
+offset_left = 949.0
+offset_top = 15.0
+offset_right = 1037.0
+offset_bottom = 41.0
+scale = Vector2(1.74239, 2.28383)
+text = ": Your lives "
+
+[node name="Label2" type="Label" parent="Tutorial"]
+offset_left = 659.0
+offset_top = 94.0
+offset_right = 1242.0
+offset_bottom = 146.0
+scale = Vector2(1.10201, 1.29167)
+text = ": The amount of fruits you've caught 
+out of how many you need to win a life"
+
+[node name="Label3" type="Label" parent="Tutorial"]
+offset_left = 715.0
+offset_top = 332.0
+offset_right = 1298.0
+offset_bottom = 384.0
+scale = Vector2(1.10201, 1.29167)
+text = "Your dashes out of your max dashes:
+(Press space to dash)"
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(575, 333)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qug1h")
+
+[node name="Play" type="Button" parent="."]
+offset_left = 512.0
+offset_top = 512.0
+offset_right = 640.0
+offset_bottom = 576.0
+text = "Play"
+script = ExtResource("7_ybde7")
+
+[connection signal="button_down" from="Play" to="Play" method="_on_button_down"]

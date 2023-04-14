@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://t3x1p3eqqobc"]
+
+[ext_resource type="Script" path="res://Scripts/fruits.gd" id="1_ygtw2"]
+[ext_resource type="Texture2D" uid="uid://c8y255falsjic" path="res://Assets/Fruits/fraise.png" id="2_p8vic"]
+[ext_resource type="Script" path="res://Scripts/Texture_variation.gd" id="3_q4u0c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mbc1y"]
+radius = 118.347
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tw7mp"]
+radius = 25.1031
+
+[node name="fruit" type="CharacterBody2D"]
+position = Vector2(443, 241)
+scale = Vector2(0.44, 0.44)
+script = ExtResource("1_ygtw2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(20.4546, -2.27274)
+texture = ExtResource("2_p8vic")
+script = ExtResource("3_q4u0c")
+
+[node name="FruitArea" type="Area2D" parent="Sprite2D"]
+position = Vector2(-0.00012207, 15.9092)
+rotation = 1.09781
+scale = Vector2(0.743606, 1.0049)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/FruitArea"]
+shape = SubResource("CircleShape2D_mbc1y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(38.6364, 15.9091)
+shape = SubResource("CircleShape2D_tw7mp")
+
+[connection signal="area_entered" from="Sprite2D/FruitArea" to="." method="_on_area_2d_area_entered"]

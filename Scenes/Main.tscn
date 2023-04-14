@@ -1,0 +1,129 @@
+[gd_scene load_steps=14 format=3 uid="uid://bpub2yxyag4fo"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_04f1o"]
+[ext_resource type="Texture2D" uid="uid://bxbxfrd54cylp" path="res://Assets/Fruits/60785e3b8fe32f534c6d9906_Pic_6.jpg" id="1_jppnt"]
+[ext_resource type="PackedScene" uid="uid://1xsf808seg33" path="res://Scenes/player.tscn" id="2_2hojk"]
+[ext_resource type="Script" path="res://Scripts/SprintWinnings.gd" id="3_fek0s"]
+[ext_resource type="Script" path="res://Scripts/HUD.gd" id="4_b4kqo"]
+[ext_resource type="Texture2D" uid="uid://igjixcdhp7jf" path="res://Assets/HUD/EmptyHeart.png" id="4_f0oey"]
+[ext_resource type="Texture2D" uid="uid://eq0bn67ra4ar" path="res://Assets/HUD/Heart.png" id="5_2d1pc"]
+[ext_resource type="Texture2D" uid="uid://dplkt7vugsegt" path="res://Assets/HUD/plusHeart.png" id="7_bet5v"]
+[ext_resource type="Texture2D" uid="uid://w6oyrfoyafvw" path="res://Assets/HUD/SprintEmpty.png" id="8_8j7ex"]
+[ext_resource type="Texture2D" uid="uid://c28pcpaf0ctqr" path="res://Assets/HUD/Sprint.png" id="9_rth1d"]
+[ext_resource type="Script" path="res://Scripts/InGameScore.gd" id="11_pqdmd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gn7k3"]
+size = Vector2(136, 402)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fyab"]
+size = Vector2(2421, 108)
+
+[node name="GameControl" type="Node2D"]
+script = ExtResource("1_04f1o")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(575, 333)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_jppnt")
+script = ExtResource("3_fek0s")
+
+[node name="Timer" type="Timer" parent="Background"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="Background"]
+wait_time = 0.5
+one_shot = true
+
+[node name="player" parent="." instance=ExtResource("2_2hojk")]
+position = Vector2(536, 559)
+scale = Vector2(0.900005, 0.900005)
+
+[node name="Edges" type="StaticBody2D" parent="."]
+position = Vector2(575, 333)
+scale = Vector2(0.5, 0.5)
+
+[node name="Edges2" type="CollisionShape2D" parent="Edges"]
+position = Vector2(1230, 368)
+shape = SubResource("RectangleShape2D_gn7k3")
+
+[node name="Edges" type="CollisionShape2D" parent="Edges"]
+position = Vector2(-1220, 390)
+shape = SubResource("RectangleShape2D_gn7k3")
+
+[node name="GameArea" type="Area2D" parent="Edges"]
+position = Vector2(40, 228)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/GameArea"]
+position = Vector2(-12, 688)
+shape = SubResource("RectangleShape2D_8fyab")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("4_b4kqo")
+
+[node name="HeartsEmpty" type="TextureRect" parent="HUD"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_right = 160.0
+offset_bottom = 16.0
+scale = Vector2(6, 6)
+texture = ExtResource("4_f0oey")
+stretch_mode = 1
+
+[node name="GoldenHeartsEmpty" type="TextureRect" parent="HUD"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_top = 80.0
+offset_right = 112.0
+offset_bottom = 96.0
+scale = Vector2(6, 6)
+texture = ExtResource("4_f0oey")
+stretch_mode = 1
+
+[node name="HeartsFull" type="TextureRect" parent="HUD"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(6, 6)
+texture = ExtResource("5_2d1pc")
+stretch_mode = 1
+
+[node name="GoldenHeartsFull" type="TextureRect" parent="HUD"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_left = -96.0
+offset_top = 80.0
+offset_right = -80.0
+offset_bottom = 96.0
+scale = Vector2(6, 5.976)
+texture = ExtResource("7_bet5v")
+stretch_mode = 1
+
+[node name="SprintEmpty" type="TextureRect" parent="HUD"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_left = 1026.0
+offset_top = 135.0
+offset_right = 1042.0
+offset_bottom = 215.0
+scale = Vector2(6, 6)
+texture = ExtResource("8_8j7ex")
+stretch_mode = 1
+
+[node name="SprintFull" type="TextureRect" parent="HUD"]
+modulate = Color(1, 1, 1, 0.705882)
+offset_left = 1026.0
+offset_top = 519.0
+offset_right = 1042.0
+offset_bottom = 535.0
+scale = Vector2(6, 6)
+texture = ExtResource("9_rth1d")
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="HUD"]
+offset_left = 1046.0
+offset_top = -19.0
+offset_right = 1174.0
+offset_bottom = 45.0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_pqdmd")
+
+[connection signal="timeout" from="Background/Timer" to="Background" method="_on_timer_timeout"]
+[connection signal="timeout" from="Background/Timer2" to="Background" method="_on_timer_2_timeout"]
